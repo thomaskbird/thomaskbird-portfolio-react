@@ -115,14 +115,8 @@ export class App extends React.Component<AppProps, State> {
 
   private handleAppScroll(evt: any): void {
     const scrollTop = evt.target.scrollTop;
-    if(scrollTop > 50 && this.state.isTop) {console.log("false");
-      this.setState({
-        isTop: false
-      });
-    } else {console.log("true");
-      this.setState({
-        isTop: true
-      });
-    }
+    this.setState({
+      isTop: !(scrollTop > 50)
+    });
   }
 }
