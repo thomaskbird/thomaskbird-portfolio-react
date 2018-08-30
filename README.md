@@ -35,6 +35,13 @@ This repo utilizes webpack for build and development server. It combines sass fo
 1.  The app will launch in the system default browser at [localhost:8000](http://localhost:8000/).
 1.  Make edits, and the app will automatically update via HMR (Hot Module Reloading) on your local dev server.
 
+### Installation
+Run the following commands:
+- `npm install`
+- `vim src/config.tsx` - Create your config object literal and export it with the required fields
+- `npm run buildProd`
+- `vim dist/.htaccess` - You only need to do this if the file doesn't already exist
+
 ### Htaccess
 In order for routing to work properly you need to have a `.htaccess` file inside the root directory of where the app is being loaded from. This is usually inside the `/dist` directory
 
