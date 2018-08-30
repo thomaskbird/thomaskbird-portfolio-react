@@ -1,0 +1,31 @@
+.SkillViewItem {
+  cursor: pointer;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ddd;
+
+  &-title {
+    font-size: .8rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+
+    svg {
+      float: right;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+  }
+
+  &-description {
+    display: none;
+    font-size: .8rem;
+    padding-bottom: 15px;
+
+    a {
+      margin-left: 5px;
+    }
+
+    &.open {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,64 @@
+.ResumeItem {
+  display: flex;
+  margin-bottom: 30px;
+  flex-direction: row;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ddd;
+/*
+  &.alt {
+    flex-direction: row-reverse;
+
+    .ResumeItem-content {
+      padding-left: 0;
+      padding-right: 30px;
+    }
+  }
+*/
+  &-img {
+    flex: 1 0 0;
+
+    img {
+      padding: 3px;
+      max-width: 100%;
+      background: #fff;
+      border: 1px solid #ccc;
+    }
+  }
+
+  &-content {
+    flex: 4 0 0;
+    padding-left: 30px;
+
+    &-header {
+      &-left {
+        &-company {
+          margin: 0;
+          color: #333;
+          font-size: .8rem;
+          letter-spacing: 5px;
+        }
+
+        &-title {
+          margin-left: 5px;
+          color: #999;
+        }
+      }
+
+      &-right {
+        font-size: .75rem;
+
+        &-type {
+          margin-right: 5px;
+          background: #ddd;
+          padding: 1px 5px;
+          border-radius: 2px;
+          border: 1px solid #ccc;
+        }
+      }
+    }
+
+    &-body {
+      margin-top: 5px;
+    }
+  }
+}

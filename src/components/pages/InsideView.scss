@@ -1,0 +1,62 @@
+.content {
+    display: flex;
+    flex-direction: row;
+
+    &-main,
+    &-sidebar {
+        padding: 25px 0;
+    }
+
+    &-main {
+        flex: 3 0 0;
+        margin-right: 30px;
+
+        b,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: .9rem;
+        }
+
+        &-title {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            letter-spacing: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        h3,
+        h4,
+        h5 {
+            letter-spacing: 5px;
+            font-size: 1rem;
+        }
+    }
+
+    &-sidebar {
+        flex: 1 0 0;
+    }
+}
+
+.InsideView {
+    &-featured {
+        width: 100%;
+        padding: 3px;
+        overflow: hidden;
+        background: #fff;
+        max-height: 200px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+
+        &-img {
+            width: 100%;
+        }
+    }
+}

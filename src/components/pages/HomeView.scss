@@ -1,0 +1,43 @@
+.posts {
+  .container-inner {
+    display: flex;
+    flex-direction: row;
+
+    .SinglePostView {
+      flex: 1 0 0;
+      padding: 15px;
+    }
+  }
+}
+
+.skills {
+  .container-inner {
+    display: flex;
+    padding: 50px 0;
+    flex-direction: row;
+
+    .skill-column {
+      padding: 0 15px;
+      flex: 1 0 0;
+    }
+  }
+}
+
+.slider {
+  padding: 30px 0;
+  background: url("../../../public/img/shadow.png") no-repeat center bottom;
+}
+
+@media (max-width: 767px) {
+  .skills {
+    .container-inner {
+      flex-direction: column;
+    }
+  }
+
+  .posts {
+    .container-inner {
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+h2 {
+    font-size: 1.8rem;
+    letter-spacing: 10px;
+}
+
+.resume {
+    &-experience {
+        h2 {
+            margin-bottom: 30px;
+        }
+    }
+}

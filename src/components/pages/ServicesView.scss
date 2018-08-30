@@ -1,0 +1,10 @@
+.ServicesView {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+  .ServicesView {
+    flex-direction: column;
+  }
+}
