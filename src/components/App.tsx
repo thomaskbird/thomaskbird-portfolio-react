@@ -98,7 +98,7 @@ export class App extends React.Component<AppProps, State> {
             <Route path={"/resume/print"} component={ResumePrintView} />
             <Route path={"/resume"} component={ResumeView} />
             <Route path={"/search/:term?"} component={SearchView} />
-            <Route path={"/list/:slug"} component={ListView} />
+            <Route path={"/list/:slug/:page?"} component={ListView} />
             <Route path={"/:slug/:contentType?"} component={InsideView} />
             <Route component={InsideView} />
           </Switch>
