@@ -127,6 +127,10 @@ export class ListView extends React.Component<ListViewProps, State> {
                 <div className={"container-outer"}>
                     <div className={"container-inner row"}>
                         <div className={"content-main"}>
+                            <Paginator
+                              paginationData={this.state.paginationData!}
+                            />
+
                             {this.state.content!.map((item: Content, idx: number) => {
                                 return (
                                     <ListViewItem

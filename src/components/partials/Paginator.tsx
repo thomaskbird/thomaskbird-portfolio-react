@@ -37,26 +37,44 @@ export class Paginator extends React.Component<PaginatorProps, State> {
     return (
       <ul className={"Paginator"}>
         {this.generateFirstLink()}
+        {this.generatePreviousLink()}
         {_.times(this.state.totalPages, (num) => {
           return this.generateNumberLink(num);
         })}
+        {this.generateNextLink()}
         {this.generateLastLink()}
       </ul>
     );
   }
 
   private generateFirstLink(): any {
-    if(this.props.paginationData.current_page !== 1) {
+    if(this.props.paginationData.current_page > 1) {
       return (
-        <li key={0}><Link to={`/list/${this.props.paginationData.slug}/1`}>{"First page"}</Link></li>
+        <li key={"first"}><Link to={`/list/${this.props.paginationData.slug}/1`}>First page</Link></li>
+      );
+    }
+  }
+
+  private generatePreviousLink(): any {
+    if(this.props.paginationData.current_page > 1) {
+      return (
+        <li key={"previous"}><Link to={`/list/${this.props.paginationData.slug}/${(this.props.paginationData.current_page - 1)}`}>Previous</Link></li>
       );
     }
   }
 
   private generateLastLink(): any {
-    if(this.state.totalPages !== this.props.paginationData.current_page) {
+    if(this.props.paginationData.current_page < this.state.totalPages) {
       return (
-        <li key={(this.state.totalPages + 1)}><Link to={`/list/${this.props.paginationData.slug}/${this.state.totalPages}`}>{"Last page"}</Link></li>
+        <li key={"last"}><Link to={`/list/${this.props.paginationData.slug}/${this.state.totalPages}`}>Last page</Link></li>
+      );
+    }
+  }
+
+  private generateNextLink(): any {
+    if(this.props.paginationData.current_page < this.state.totalPages) {
+      return (
+        <li key={"next"}><Link to={`/list/${this.props.paginationData.slug}/${(this.props.paginationData.current_page + 1)}`}>Next</Link></li>
       );
     }
   }
@@ -64,7 +82,7 @@ export class Paginator extends React.Component<PaginatorProps, State> {
   private generateNumberLink(num: number): any {
     if(this.state.totalPages > 1) {
       return (
-        <li key={(num + 1)}><Link to={`/list/${this.props.paginationData.slug}/${(num + 1)}`}>{(num + 1)}</Link></li>
+        <li key={(num + 1)}><Link className={this.props.paginationData.current_page === (num + 1) ? "current" : ""} to={`/list/${this.props.paginationData.slug}/${(num + 1)}`}>{(num + 1)}</Link></li>
       );
     } else {
       return (
