@@ -86,7 +86,7 @@ export class Paginator extends React.Component<PaginatorProps, State> {
       );
     } else {
       return (
-        <p key={1}>End of results...</p>
+        <li className={"no-results"} key={1}>End of results...</li>
       );
     }
   }
