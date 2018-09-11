@@ -61,7 +61,7 @@ interface State {
   /**
    * The current path
    */
-  path: string;
+  path: string | undefined;
 }
 
 export class App extends React.Component<AppProps, State> {
@@ -71,19 +71,24 @@ export class App extends React.Component<AppProps, State> {
     super(props, context);
 
     this.state = {
-      path: window.location.pathname,
+      path: undefined,
       isTop: true
     };
 
     ReactGA.initialize("UA-40542612-8");
-    ReactGA.pageview(window.location.pathname);
+    this.setPageData();
   }
 
   public componentDidUpdate(prevProps: any, prevState: any, snapshot: any): void {
     if(this.state.path !== window.location.pathname) {
-      this.setState({ path: window.location.pathname });
-      ReactGA.pageview(window.location.pathname);
+      this.setPageData();
     }
+  }
+
+  private setPageData(): void {
+    const path = window.location.pathname;
+    this.setState({ path: path });
+    ReactGA.pageview(path);
   }
 
   public render(): JSX.Element {
