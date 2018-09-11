@@ -1,6 +1,7 @@
 import "./App.scss";
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
+import * as ReactGA from "react-ga";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faChevronUp,
@@ -31,6 +32,7 @@ import {ServicesView} from "./pages/ServicesView";
 import {SearchView} from "./pages/SearchView";
 import {ResumeView} from "./pages/ResumeView";
 import {ResumePrintView} from "./pages/ResumePrintView";
+import { RouteComponentProps } from "react-router";
 
 library.add(
   faChevronDown,
@@ -47,7 +49,7 @@ library.add(
   faCircleNotch
 );
 
-export interface AppProps {
+export interface AppProps extends RouteComponentProps<any> {
   config?: object;
 }
 
@@ -56,6 +58,10 @@ interface State {
    * Defines whether the page is at the top
    */
   isTop: boolean;
+  /**
+   * The current path
+   */
+  path: string;
 }
 
 export class App extends React.Component<AppProps, State> {
@@ -65,8 +71,19 @@ export class App extends React.Component<AppProps, State> {
     super(props, context);
 
     this.state = {
+      path: window.location.pathname,
       isTop: true
     };
+
+    ReactGA.initialize("UA-40542612-8");
+    ReactGA.pageview(window.location.pathname);
+  }
+
+  public componentDidUpdate(prevProps: any, prevState: any, snapshot: any): void {
+    if(this.state.path !== window.location.pathname) {
+      this.setState({ path: window.location.pathname });
+      ReactGA.pageview(window.location.pathname);
+    }
   }
 
   public render(): JSX.Element {
