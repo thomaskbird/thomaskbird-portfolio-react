@@ -15,6 +15,8 @@ import {
   faEnvelope,
   faPrint,
   faFilePdf,
+  faChevronLeft,
+  faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faCircleNotch
@@ -46,7 +48,9 @@ library.add(
   faEnvelope,
   faPrint,
   faFilePdf,
-  faCircleNotch
+  faCircleNotch,
+  faChevronLeft,
+  faChevronRight,
 );
 
 export interface AppProps extends RouteComponentProps<any> {

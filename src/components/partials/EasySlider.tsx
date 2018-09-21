@@ -21,6 +21,10 @@ interface EasySliderProps {
      * The defined slide interval or false for no auto
      */
     slideInterval?: number;
+    /**
+     * Determines whether there should previous/next btns
+     */
+    btns?: boolean;
 }
 
 interface State {
@@ -109,6 +113,12 @@ export class EasySlider extends React.Component<EasySliderProps, State> {
             return (
                 <div className={"easy-slider"}>
                     <div className={"easy-slider-viewport"}>
+                        {this.props.btns ? (
+                            <div className={"easy-slider-viewport-btn left"} onClick={() => { this.handleBtnClick("previous") }}>
+                                <FontAwesomeIcon icon={"chevron-left"} className={`easy-slider-viewport-btn-icon`} />
+                            </div>
+                        ) : (undefined)}
+
                         <div className={"easy-slider-viewport-reel animated"} style={{ width: this.state.reelWidth +"%", left: "-"+ this.state.reelPosition +"%"}}>
 
                             {this.props.slides!.map((slide: Content, idx) => {
@@ -134,8 +144,13 @@ export class EasySlider extends React.Component<EasySliderProps, State> {
                                     </div>
                                 );
                             })}
-
                         </div>
+
+                        {this.props.btns ? (
+                            <div className={"easy-slider-viewport-btn right"} onClick={() => { this.handleBtnClick("next") }}>
+                                <FontAwesomeIcon icon={"chevron-right"} className={`easy-slider-viewport-btn-icon`} />
+                            </div>
+                        ) : (undefined)}
                     </div>
                     <div className={"easy-slider-pagination"}>
                         <div className={"easy-slider-pagination-holder"}>
@@ -153,6 +168,29 @@ export class EasySlider extends React.Component<EasySliderProps, State> {
                 </div>
             );
         }
+    }
+
+    private handleBtnClick(dir: string): void {
+        let next = 0;
+
+        switch(dir) {
+          case "previous":
+              if((this.state.current - 1) < 0) {
+                  next = (this.state.total - 1);
+              } else {
+                  next = this.state.current - 1;
+              }
+          break;
+          case "next":
+              if((this.state.current + 1) < this.state.total) {
+                  next = this.state.current + 1;
+              } else {
+                  next = 0;
+              }
+          break;
+        }
+
+        this.handlePaginationClick(next);
     }
 
     private handlePaginationClick(idx: number): void {
