@@ -94,7 +94,7 @@ export class Paginator extends React.Component<PaginatorProps, State> {
   }
 
   private generateNoContent(): any {
-    if(this.state.totalPages === 1) {
+    if(this.state.totalPages === 0) {
       return (
         <li className={"no-results"} key={1}>No results...</li>
       );
