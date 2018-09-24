@@ -31,7 +31,6 @@ export class Paginator extends React.Component<PaginatorProps, State> {
     this.setState({
       totalPages: Math.ceil(this.props.paginationData.total / this.props.paginationData.per_page)
     });
-    console.log("this.state.totalPages", this.state.totalPages);
   }
 
   public render(): JSX.Element {
