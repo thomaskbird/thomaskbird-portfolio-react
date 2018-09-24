@@ -1,6 +1,7 @@
 import "./App.scss";
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
+import * as ReactGA from "react-ga";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faChevronUp,
@@ -14,6 +15,8 @@ import {
   faEnvelope,
   faPrint,
   faFilePdf,
+  faChevronLeft,
+  faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faCircleNotch
@@ -31,6 +34,7 @@ import {ServicesView} from "./pages/ServicesView";
 import {SearchView} from "./pages/SearchView";
 import {ResumeView} from "./pages/ResumeView";
 import {ResumePrintView} from "./pages/ResumePrintView";
+import { RouteComponentProps } from "react-router";
 
 library.add(
   faChevronDown,
@@ -44,10 +48,12 @@ library.add(
   faEnvelope,
   faPrint,
   faFilePdf,
-  faCircleNotch
+  faCircleNotch,
+  faChevronLeft,
+  faChevronRight,
 );
 
-export interface AppProps {
+export interface AppProps extends RouteComponentProps<any> {
   config?: object;
 }
 
@@ -56,6 +62,10 @@ interface State {
    * Defines whether the page is at the top
    */
   isTop: boolean;
+  /**
+   * The current path
+   */
+  path: string | undefined;
 }
 
 export class App extends React.Component<AppProps, State> {
@@ -65,8 +75,24 @@ export class App extends React.Component<AppProps, State> {
     super(props, context);
 
     this.state = {
+      path: undefined,
       isTop: true
     };
+
+    ReactGA.initialize("UA-40542612-8");
+    this.setPageData();
+  }
+
+  public componentDidUpdate(prevProps: any, prevState: any, snapshot: any): void {
+    if(this.state.path !== window.location.pathname) {
+      this.setPageData();
+    }
+  }
+
+  private setPageData(): void {
+    const path = window.location.pathname;
+    this.setState({ path: path });
+    ReactGA.pageview(path);
   }
 
   public render(): JSX.Element {
