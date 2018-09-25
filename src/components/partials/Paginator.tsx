@@ -30,12 +30,13 @@ export class Paginator extends React.Component<PaginatorProps, State> {
   public componentDidMount(): void {
     this.setState({
       totalPages: Math.ceil(this.props.paginationData.total / this.props.paginationData.per_page)
-    })
+    });
   }
 
   public render(): JSX.Element {
     return (
       <ul className={"Paginator"}>
+        {this.generateNoContent()}
         {this.generateFirstLink()}
         {this.generatePreviousLink()}
         {_.times(this.state.totalPages, (num) => {
@@ -87,6 +88,14 @@ export class Paginator extends React.Component<PaginatorProps, State> {
     } else {
       return (
         <li className={"no-results"} key={1}>End of results...</li>
+      );
+    }
+  }
+
+  private generateNoContent(): any {
+    if(this.state.totalPages === 0) {
+      return (
+        <li className={"no-results"} key={1}>No results...</li>
       );
     }
   }
