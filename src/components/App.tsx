@@ -111,7 +111,7 @@ export class App extends React.Component<AppProps, State> {
           </div>
           <div className={"container-outer whats-new"}>
             <div className={"container-inner"}>
-              <b>Whats new:</b> This is just some test text
+              <b>Whats new:</b> Open to new contract remote roles!
             </div>
           </div>
         </div>
