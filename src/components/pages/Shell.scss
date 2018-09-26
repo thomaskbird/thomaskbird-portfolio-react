@@ -1,0 +1,246 @@
+.overall-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .header-wrap {
+        flex: 1 1 auto;
+    }
+
+    .main-page-content {
+        flex: 100 1 auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+        padding-bottom: 50px;
+    }
+
+    .footer {
+        flex: 1 1 auto;
+    }
+}
+
+.container {
+    &-outer {
+        width: 100%;
+    }
+
+    &-inner {
+        width: 1170px;
+        margin: 0 auto;
+
+        &.row {
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}
+
+.nav-public {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+
+    a {
+        text-decoration: none;
+    }
+
+    .container-inner {
+        display: flex;
+        padding: 10px 0;
+        flex-direction: row;
+    }
+
+    &-left,
+    &-right {
+        flex: 1 0;
+    }
+
+    &-right {
+        ul {
+            padding: 0;
+            float: right;
+            display: flex;
+            margin: 2px 0 0 0;
+            flex-direction: row;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            color: #999;
+            padding: 10px;
+
+            &:hover {
+                color: #333;
+            }
+        }
+    }
+}
+
+.whats-new {
+    padding: 10px 0;
+    font-size: .85rem;
+    background: #f9f9f9;
+    border-bottom: 1px solid #ccc;
+}
+
+.brand {
+    &-name,
+    &-title {
+        font-size: 1.3rem;
+        margin-right: 5px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+    }
+
+    &-name {
+        color: #444;
+        font-weight: 500;
+    }
+
+    &-title {
+        color: #999;
+        font-weight: 200;
+    }
+
+    &:hover {
+        .brand-name {
+            color: #000;
+        }
+
+        .brand-title {
+            color: #555;
+        }
+    }
+}
+
+.footer {
+    background: #fff;
+    border-top: 1px solid #ddd;
+
+    p {
+        font-size: .85rem;
+        padding: 15px 0 30px 0;
+    }
+}
+
+.animated {
+    transition: left 1s;
+    -moz-transition: left 1s;
+    -webkit-transition: left 1s;
+    -o-transition: left 1s;
+}
+
+.animate-height {
+    transition: height 1s;
+    -moz-transition: height 1s;
+    -webkit-transition: height 1s;
+    -o-transition: height 1s;
+}
+
+@media(max-width: 1170px) {
+    .container {
+        &-inner {
+            width: 1024px;
+        }
+    }
+}
+
+@media(max-width: 1024px) {
+    .container {
+        &-inner {
+            width: 100%;
+
+            .content {
+                &-main {
+                    margin-left: 30px;
+                }
+
+                &-sidebar {
+                    margin-right: 30px;
+                }
+            }
+        }
+    }
+
+    .nav-public {
+        .container-inner {
+            padding: 10px;
+        }
+    }
+
+    .whats-new {
+        .container-inner {
+            padding: 0 15px;
+        }
+    }
+}
+
+@media(max-width: 767px) {
+    .container {
+        &-inner {
+            width: 100%;
+
+            &.row {
+                flex-direction: column;
+
+                .content {
+                    &-main,
+                    &-sidebar {
+                        padding: 15px;
+                    }
+
+                    &-main {
+                        margin-left: 0;
+                        margin-right: 0;
+                    }
+
+                    &-sidebar {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .nav-public {
+        .container-inner {
+            flex-direction: column;
+        }
+
+        &-right {
+            ul {
+                float: none;
+            }
+        }
+    }
+}
+
+@media(max-width: 500px) {
+    .brand {
+        &-name,
+        &-title {
+            font-size: .8rem;
+        }
+    }
+}
+
+// Compensating for iphone x inset area
+@media only screen
+and (device-width : 375px)
+and (device-height : 812px)
+and (-webkit-device-pixel-ratio : 3)
+and (orientation : landscape) {
+    .container-inner {
+        margin: 0 30px;
+    }
+}
+
+@media(max-device-height: 812px) {
+    .header-wrap.hide,
+    .footer.hide {
+        display: none;
+    }
+}
