@@ -65,6 +65,7 @@
 @media(max-width: 767px) {
     .content {
         &-main {
+            flex: 1;
             overflow: inherit;
         }
     }

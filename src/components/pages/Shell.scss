@@ -13,6 +13,12 @@
         overflow-x: hidden;
         position: relative;
         padding-bottom: 50px;
+
+        .container-outer,
+        .container-inner {
+            height: 100%;
+            position: relative;
+        }
     }
 
     .footer {
