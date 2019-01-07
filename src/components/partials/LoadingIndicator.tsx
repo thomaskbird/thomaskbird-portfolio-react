@@ -34,7 +34,7 @@ export class LoadingIndicator extends React.Component<LoadingIndicatorProps, Sta
             );
         } else {
             return (
-                <div />
+                <></>
             );
         }
     }
