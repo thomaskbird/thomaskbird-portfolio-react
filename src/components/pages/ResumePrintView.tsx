@@ -81,7 +81,8 @@ export class ResumePrintView extends React.Component<ResumePrintViewProps, State
                         />
 
                         <ResumeExperience
-                            jobs={this.state.jobs}
+                          isPrintView={true}
+                          jobs={this.state.jobs}
                         />
                     </div>
                     <div className={"BrandContactInfo"}>

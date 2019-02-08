@@ -8,6 +8,10 @@ interface ResumeExperienceProps {
      * All of the pages data
      */
     jobs: Job[] | undefined;
+  /**
+   * Determines whether this is the print view
+   */
+  isPrintView?: boolean;
 }
 
 interface State {}
@@ -35,6 +39,7 @@ export class ResumeExperience extends React.Component<ResumeExperienceProps, Sta
                             key={idx}
                             resume={item}
                             idx={idx}
+                            isPrintView={this.props.isPrintView}
                         />
                     );
                 })}

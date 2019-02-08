@@ -7,3 +7,7 @@ export function createDescription(str: string, limit: any = false): string {
 
     return cleanStr;
 }
+
+export function createNonTruncatedDescription(str: string): string {
+  return str.replace(/(<([^>]+)>)/ig,"");
+}

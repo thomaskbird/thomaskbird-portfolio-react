@@ -3,7 +3,7 @@ import * as moment from "moment";
 import "./ResumeItem.scss";
 
 import {Job} from "../../interfaces";
-import {createDescription} from "../../Helpers";
+import {createDescription, createNonTruncatedDescription} from "../../Helpers";
 
 interface ResumeItemProps {
     /**
@@ -14,6 +14,10 @@ interface ResumeItemProps {
      * index of item
      */
     idx: number;
+  /**
+   * Defines whether this is the print view
+   */
+  isPrintView?: boolean;
 }
 
 interface State {}
@@ -52,7 +56,7 @@ export class ResumeItem extends React.Component<ResumeItemProps, State> {
                         </div>
                     </div>
                     <div className={"ResumeItem-content-body"}>
-                        <p>{createDescription(this.props.resume.body, 300)}</p>
+                        <p>{this.props.isPrintView ? createNonTruncatedDescription(this.props.resume.body) : createDescription(this.props.resume.body, 300)}</p>
                     </div>
                 </div>
             </div>
