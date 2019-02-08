@@ -52,7 +52,7 @@ export class ResumeItem extends React.Component<ResumeItemProps, State> {
                         </div>
                     </div>
                     <div className={"ResumeItem-content-body"}>
-                        <p>{createDescription(this.props.resume.body, 300)}</p>
+                        <p>{this.props.resume.body}</p>
                     </div>
                 </div>
             </div>
