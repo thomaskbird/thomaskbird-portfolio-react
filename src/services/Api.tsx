@@ -70,6 +70,9 @@ export class Api {
     ): any {
         const qualifiedUrl = this.config.apiUrl + url;
         return fetch(qualifiedUrl, config)
+            .catch(err => {
+                console.log("Error: ", err);
+            })
             .then(response => response.json());
     }
 }

@@ -109,45 +109,35 @@ export class ListView extends React.Component<ListViewProps, State> {
     }
 
     public render(): JSX.Element {
-        if(this.state.isLoading) {
-            return (
-                <div className={"container-outer"}>
-                    <div className={"container-inner row"}>
-                        <div className={"content-main"}>
-                            <LoadingIndicator
-                                isLoading={this.state.isLoading}
-                            />
-                        </div>
-                        <SidebarView />
-                    </div>
-                </div>
-            );
-        } else {
-            return (
-                <div className={"container-outer"}>
-                    <div className={"container-inner row"}>
-                        <div className={"content-main"}>
-                            <Paginator
-                              paginationData={this.state.paginationData!}
-                            />
+      return (
+        <>
+          <LoadingIndicator
+            isLoading={this.state.isLoading}
+          />
+          <div className={"container-outer"}>
+              <div className={"container-inner row"}>
+                  <div className={"content-main"}>
+                      {this.state.paginationData ? (<Paginator
+                        paginationData={this.state.paginationData!}
+                      />) : (undefined)}
 
-                            {this.state.content!.map((item: Content, idx: number) => {
-                                return (
-                                    <ListViewItem
-                                        key={idx}
-                                        content={item}
-                                    />
-                                );
-                            })}
+                      {this.state.content && this.state.content!.map((item: Content, idx: number) => {
+                          return (
+                              <ListViewItem
+                                  key={idx}
+                                  content={item}
+                              />
+                          );
+                      })}
 
-                            <Paginator
-                              paginationData={this.state.paginationData!}
-                            />
-                        </div>
-                        <SidebarView />
-                    </div>
-                </div>
-            );
-        }
+                      {this.state.paginationData ? (<Paginator
+                        paginationData={this.state.paginationData!}
+                      />) : (undefined)}
+                  </div>
+                  <SidebarView />
+              </div>
+          </div>
+        </>
+      );
     }
 }

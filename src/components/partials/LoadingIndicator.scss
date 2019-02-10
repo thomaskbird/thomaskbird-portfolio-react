@@ -6,13 +6,15 @@
   height: 100%;
   z-index: 100;
   font-size: 32px;
-  position: absolute;
+  position: fixed;
   text-align: center;
   background: rgba(0, 0, 0, 0.5);
 
-  .fa {
+  &-holder {
     margin-top: 20%;
+  }
 
+  .fa {
     img {
       width: 50px;
     }
