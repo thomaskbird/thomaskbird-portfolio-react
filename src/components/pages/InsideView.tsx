@@ -41,6 +41,7 @@ export class InsideView extends React.Component<InsideViewProps, State> {
       context: any
   ) {
     super(props, context);
+    console.log("TEST");
 
     this.state = {
       api: new Api(),
@@ -74,72 +75,30 @@ export class InsideView extends React.Component<InsideViewProps, State> {
   }
 
   public render(): JSX.Element {
-    if(!this.state.isLoading) {
-      if(this.state.page) {
-        if(this.state.page.portfolio) {
-          return (
-            <div className={"container-outer"}>
-              <div className={"container-inner row"}>
-                <div className={"content-main"}>
-                  <LoadingIndicator
-                    isLoading={this.state.isLoading}
-                  />
+    return (
+      <>
+        <LoadingIndicator
+          isLoading={this.state.isLoading}
+        />
+        <div className={"container-outer"}>
+          <div className={"container-inner row"}>
+            <div className={"content-main"}>
+              {this.state.isLoading || this.state.page ? (undefined) : (<h2>Uh oh, the page you were looking for can't be found please try again!</h2>)}
 
-                  <div className={"InsideView-featured"}>
-                    <img className={"InsideView-featured-img"} src={this.state.page.portfolio ? `http://api.thomaskbird.com/img/${this.state.page.portfolio.featured}` : ""} />
-                  </div>
-
-                  <h2 className={"content-main-title"}>{this.state.page.title}</h2>
-
-                  {ReactHtmlParser(this.state.page.body)}
+              {this.state.page && this.state.page.portfolio ? (
+                <div className={"InsideView-featured"}>
+                  <img className={"InsideView-featured-img"} src={`http://api.thomaskbird.com/img/${this.state.page.portfolio.featured}`} />
                 </div>
-                <SidebarView />
-              </div>
-            </div>
-          );
-        } else {
-          return (
-            <div className={"container-outer"}>
-              <div className={"container-inner row"}>
-                <div className={"content-main"}>
-                  <LoadingIndicator
-                    isLoading={this.state.isLoading}
-                  />
+              ) : (undefined)}
 
-                  <h2 className={"content-main-title"}>{this.state.page.title}</h2>
+              <h2 className={"content-main-title"}>{this.state.page && this.state.page.title}</h2>
 
-                  {ReactHtmlParser(this.state.page.body)}
-                </div>
-                <SidebarView />
-              </div>
+              {ReactHtmlParser(this.state.page && this.state.page.body)}
             </div>
-          );
-        }
-      } else {
-          return (
-              <div className={"container-outer"}>
-                  <div className={"container-inner row"}>
-                      <div className={"content-main"}>
-                          <h2>Uh oh, the page you were looking for can't be found please try again!</h2>
-                      </div>
-                      <SidebarView />
-                  </div>
-              </div>
-          );
-      }
-    } else {
-      return (
-          <div className={"container-outer"}>
-              <div className={"container-inner row"}>
-                  <div className={"content-main"}>
-                      <LoadingIndicator
-                          isLoading={this.state.isLoading}
-                      />
-                  </div>
-                  <SidebarView />
-              </div>
+            <SidebarView />
           </div>
-      );
-    }
+        </div>
+      </>
+    );
   }
 }
