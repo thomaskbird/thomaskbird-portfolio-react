@@ -50,45 +50,35 @@ export class ResumeView extends React.Component<ResumeViewProps, State> {
     }
 
     public render(): JSX.Element {
-        if(this.state.isLoading) {
-            return (
-                <div className={"container-outer"}>
-                    <div className={"container-inner row"}>
-                        <div className={"content-main"}>
-                            <LoadingIndicator
-                                isLoading={this.state.isLoading}
-                            />
+        return (
+          <>
+            <LoadingIndicator
+              isLoading={this.state.isLoading}
+            />
+            <div className={"container-outer"}>
+                <div className={"container-inner row"}>
+                    <div className={"content-main"}>
+
+                        <ResumeAbout/>
+
+                        <div className={"resume-experience"}>
+                            <h2>Experience</h2>
+
+                            {this.state.jobs && this.state.jobs.map((item: Job, idx: number) => {
+                                return (
+                                    <ResumeItem
+                                        key={idx}
+                                        resume={item}
+                                        idx={idx}
+                                    />
+                                );
+                            })}
                         </div>
-                        <SidebarView />
                     </div>
+                    <SidebarView />
                 </div>
-            );
-        } else {
-            return (
-                <div className={"container-outer"}>
-                    <div className={"container-inner row"}>
-                        <div className={"content-main"}>
-
-                            <ResumeAbout/>
-
-                            <div className={"resume-experience"}>
-                                <h2>Experience</h2>
-
-                                {this.state.jobs!.map((item: Job, idx: number) => {
-                                    return (
-                                        <ResumeItem
-                                            key={idx}
-                                            resume={item}
-                                            idx={idx}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        </div>
-                        <SidebarView />
-                    </div>
-                </div>
-            );
-        }
+            </div>
+          </>
+        );
     }
 }
