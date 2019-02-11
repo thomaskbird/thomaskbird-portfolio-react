@@ -70,7 +70,7 @@ export class ResumePrintView extends React.Component<ResumePrintViewProps, State
                         <div className={"BrandContactInfo-right"}>
                             <span className={"BrandContactInfo-right-links"}>
                                 <button className={"btn btn-default"} onClick={this.triggerBrowserPrint}>PDF</button>
-                                <button className={"btn btn-default"}>Word</button>
+                                <button className={"btn btn-default"} onClick={() => { this.triggerDownloadWord() }}>Word</button>
                                 <Link className={"btn btn-default"} to={"/resume"}>Cancel</Link>
                             </span>
                         </div>
@@ -104,5 +104,21 @@ export class ResumePrintView extends React.Component<ResumePrintViewProps, State
 
     private triggerBrowserPrint(): void {
         window.print();
+    }
+
+    private triggerDownloadWord(): void {
+        this.state.api.get("/resume/download/doc", false, true).then((wordFile: any) => {
+            return wordFile.blob();
+        }).then((blob: any) => {
+            // const link = document.createElement("a");
+            // link.href = window.URL.createObjectURL(blob);
+            // link.download = "thomas-k-bird.doc";
+            //
+            // document.body.appendChild(link);
+            // link.click();
+            // document.body.removeChild(link);
+            const test = URL.createObjectURL(blob);
+            console.log("blob", blob, test);
+        });
     }
 }

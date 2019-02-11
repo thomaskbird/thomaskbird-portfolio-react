@@ -45,7 +45,8 @@ export class Api {
 
     public get(
         url: string,
-        token: string | boolean = false
+        token: string | boolean = false,
+        download: boolean = false
     ): any {
         const config = {
             method: "GET",
@@ -58,10 +59,18 @@ export class Api {
             };
         }
 
-        return this.send(url, {
-            ...config,
-            ...this.apiConfig
-        });
+        if(download) {
+            this.apiConfig.headers["content-type"] = "text/plain";
+            return this.sendDownload(url, {
+                ...config,
+                ...this.apiConfig
+            });
+        } else {
+            return this.send(url, {
+                ...config,
+                ...this.apiConfig
+            });
+        }
     }
 
     public send(
@@ -74,5 +83,17 @@ export class Api {
                 console.log("Error: ", err);
             })
             .then(response => response.json());
+    }
+
+    public sendDownload(
+      url: string,
+      config: object
+    ): any {
+        const qualifiedUrl = this.config.apiUrl + url;
+        return fetch(qualifiedUrl, config)
+          .catch(err => {
+              console.log("Error: ", err);
+          })
+          .then(response => response);
     }
 }
