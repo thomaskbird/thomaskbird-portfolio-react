@@ -118,8 +118,8 @@ export interface Job {
     logo: string;
     company: string;
     title: string;
-    start: string;
-    end: string;
+    start_at: string;
+    end_at: string;
     body: string;
     type: ResumeItemType
     skills: string;

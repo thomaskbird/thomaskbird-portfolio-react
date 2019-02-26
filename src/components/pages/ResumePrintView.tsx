@@ -107,9 +107,17 @@ export class ResumePrintView extends React.Component<ResumePrintViewProps, State
     }
 
     private triggerDownloadWord(): void {
+        const link = document.createElement("a");
+        link.href = "/files/thomas-k-bird-resume.docx";
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
         this.state.api.get("/resume/download/doc", false, true).then((wordFile: any) => {
             return wordFile.blob();
         }).then((blob: any) => {
+
             // const link = document.createElement("a");
             // link.href = window.URL.createObjectURL(blob);
             // link.download = "thomas-k-bird.doc";
@@ -117,8 +125,6 @@ export class ResumePrintView extends React.Component<ResumePrintViewProps, State
             // document.body.appendChild(link);
             // link.click();
             // document.body.removeChild(link);
-            const test = URL.createObjectURL(blob);
-            console.log("blob", blob, test);
         });
     }
 }

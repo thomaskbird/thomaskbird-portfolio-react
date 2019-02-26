@@ -52,7 +52,7 @@ export class ResumeItem extends React.Component<ResumeItemProps, State> {
                         </div>
                         <div className={"ResumeItem-content-header-right"}>
                             <span className={"ResumeItem-content-header-right-type"}>{this.props.resume.type}</span>
-                            {moment(this.props.resume.start).format("MMM, YYYY")} - {moment(this.props.resume.end).isAfter() ? "Present" : moment(this.props.resume.end).format("MMM, YYYY")}
+                            {moment(this.props.resume.start_at).format("MMM, YYYY")} - {moment(this.props.resume.end_at).isAfter() ? "Present" : moment(this.props.resume.end_at).format("MMM, YYYY")}
                         </div>
                     </div>
                     <div className={"ResumeItem-content-body"}>
