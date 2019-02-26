@@ -10,34 +10,46 @@ export enum ContentType {
     news = "news",
 }
 
-export interface Skill {
-    body: string;
+export interface DatetimeStamps {
     created_at: string;
-    deleted_at: string | null;
-    id: number;
-    priority: number;
-    slug: string;
-    title: string;
     updated_at: string;
+    deleted_at: string | null;
 }
 
-export interface Portfolio {
+export interface Address {
+    address_1: string;
+    address_2: string | undefined;
+    city: string;
+    state: string;
+}
+
+export interface Company extends Address, DatetimeStamps {
+    id: number;
+    name: string;
+    description: string;
+    phone: string;
+}
+
+export interface Skill extends DatetimeStamps {
+    id: number;
+    title: string;
+    slug: string;
+    body: string;
+    priority: number;
+}
+
+export interface Portfolio extends DatetimeStamps {
     id: number;
     post_id: number;
     url: string;
     mobile: string;
     desktop: string;
     featured: string;
-    created_at: string;
-    updated_at: string;
-    deleted_at: string | null;
 }
 
-export interface Content {
+export interface Content extends DatetimeStamps {
     author_id: number;
     body: string;
-    created_at: string;
-    deleted_at: string;
     description: string;
     id: number;
     keywords: string;
@@ -49,17 +61,13 @@ export interface Content {
     status: ContentStatus;
     title: string;
     type: ContentType;
-    updated_at: string;
     version_of: number;
 }
 
-export interface Tag {
+export interface Tag extends DatetimeStamps {
     id: number;
     title: string;
     slug: string;
-    created_at: string;
-    updated_at: string;
-    deleted_at: string | null;
 }
 
 export interface HomeData {
@@ -92,15 +100,12 @@ export interface ApiConfig {
     referrer: string;
 }
 
-export interface Service {
-    body: string;
-    created_at: string;
-    deleted_at: string | null;
-    icon: string;
+export interface Service extends DatetimeStamps {
     id: number;
     slug: string;
     title: string;
-    updated_at: string;
+    icon: string;
+    body: string;
 }
 
 export interface SidebarData {
@@ -114,18 +119,15 @@ export enum ResumeItemType {
     "Contract to hire" = "Contract to hire",
     "Direct Hire" = "Direct Hire",
 }
-export interface Job {
+export interface Job extends DatetimeStamps {
     logo: string;
-    company: string;
+    company: Company;
     title: string;
     start_at: string;
     end_at: string;
     body: string;
     type: ResumeItemType
     skills: string;
-    created_at: string;
-    updated_at: string;
-    deleted_at: string;
 }
 
 export interface PaginationData {
