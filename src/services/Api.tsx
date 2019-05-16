@@ -1,5 +1,5 @@
 import { config } from "../config";
-import {ApiConfig} from "../interfaces";
+import { ApiConfig } from "../interfaces";
 
 export class Api {
     private config: any;

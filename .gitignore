@@ -1,6 +1,5 @@
 /node_modules
 /.idea
 /dist
-/src/config.tsx
 **/*.DS_Store
 package-lock.json
