@@ -44,7 +44,7 @@ export class ResumeItem extends React.Component<ResumeItemProps, State> {
                     <div className={"ResumeItem-content-header"}>
                         <div className={"ResumeItem-content-header-left"}>
                             <h3 className={"ResumeItem-content-header-left-company"}>
-                                {this.props.resume.company.name}
+                                {this.props.resume.company}
                                 <span className={"ResumeItem-content-header-left-title"}>
                                     {this.props.resume.title}
                                 </span>
