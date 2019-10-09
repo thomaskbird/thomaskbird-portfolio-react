@@ -64,7 +64,7 @@ export class ResumePrintView extends React.Component<ResumePrintViewProps, State
                 <div className={"container-outer ResumePrintView"}>
                     <div className={"BrandContactInfo"}>
                         <div className={"BrandContactInfo-left"}>
-                            <Brand/>
+                            <Brand linked={false} />
                             <ContactInfo/>
                         </div>
                         <div className={"BrandContactInfo-right"}>
