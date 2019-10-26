@@ -73,11 +73,19 @@
 
         li {
             list-style: none;
+            margin-left: .6rem;
         }
 
         a {
             color: #999;
             padding: 10px;
+            font-family: trumpsoftpro,sans-serif;
+            font-size: 1.6rem;
+
+            svg {
+                vertical-align: baseline;
+                margin-right: .2rem;
+            }
 
             &:hover {
                 color: #333;
