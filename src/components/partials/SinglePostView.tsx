@@ -44,7 +44,7 @@ export class SinglePostView extends React.Component<SinglePostViewProps, State> 
                     <h5>{createDescription(this.props.postTitle, 20)}</h5>
                 </Link>
                 <p>{createDescription(this.props.content, 200)}</p>
-                <Link to={`/${this.props.slug}`}>Read more...</Link>
+                <Link className={"SinglePostView-more"} to={`/${this.props.slug}`}>Read more...</Link>
             </div>
         );
     }

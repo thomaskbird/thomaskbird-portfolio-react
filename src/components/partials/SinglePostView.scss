@@ -6,7 +6,7 @@
     }
 
     h5 {
-        font-size: 1rem;
+        font-size: 1.4rem;
         letter-spacing: 3px;
         text-transform: uppercase;
     }
@@ -17,5 +17,9 @@
 
     a {
         font-size: 1.4rem;
+    }
+
+    &-more {
+        font-size: 1rem;
     }
 }
