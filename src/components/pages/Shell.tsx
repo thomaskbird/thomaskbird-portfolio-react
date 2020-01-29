@@ -34,6 +34,7 @@ import {ServicesView} from "./ServicesView";
 import {SearchView} from "./SearchView";
 import {ResumeView} from "./ResumeView";
 import { RouteComponentProps } from "react-router";
+import {scrollSpyer} from "../../Helpers";
 
 library.add(
   faChevronDown,
@@ -89,6 +90,10 @@ export class Shell extends React.Component<ShellProps, State> {
     if(this.state.path !== window.location.pathname) {
       this.setPageData();
     }
+  }
+
+  public componentDidMount(): void {
+    scrollSpyer(".main-page-content");
   }
 
   private setPageData(): void {
