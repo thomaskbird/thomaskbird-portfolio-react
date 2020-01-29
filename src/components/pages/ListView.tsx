@@ -5,11 +5,12 @@ import { Api } from "../../services/Api";
 import { Content, PaginationData } from "../../interfaces";
 import {ListViewItem} from "../partials/ListViewItem";
 import {LoadingIndicator} from "../partials/LoadingIndicator";
-import { RouteComponentProps } from "react-router";
+import {RouteComponentProps, withRouter} from "react-router";
 import { Paginator } from "../partials/Paginator";
 import { networkInterfaces } from "os";
 
 interface ListViewProps extends RouteComponentProps<any> {
+  onReady(): void;
 }
 
 interface State {
@@ -40,29 +41,30 @@ interface State {
 }
 
 // todo: this component needs to handle tags search and blog search
-export class ListView extends React.Component<ListViewProps, State> {
-    public static readonly displayName = "App component";
+class ListView extends React.Component<ListViewProps, State> {
+  public static readonly displayName = "App component";
+  private currentReady = 0;
 
-    constructor(
-        props: ListViewProps,
-        context: any
-    ) {
-        super(props, context);
+  constructor(
+      props: ListViewProps,
+      context: any
+  ) {
+      super(props, context);
 
-      this.state = {
-        api: new Api(),
-        slug: props.match.params.slug,
-        page: props.match.params.page || 1,
-        content: undefined,
-        paginationData: undefined,
-        isLoading: true
-      };
+    this.state = {
+      api: new Api(),
+      slug: props.match.params.slug,
+      page: props.match.params.page || 1,
+      content: undefined,
+      paginationData: undefined,
+      isLoading: true
+    };
 
-      this.loadPageData(
-        props.match.params.slug,
-        props.match.params.page || 1
-      );
-    }
+    this.loadPageData(
+      props.match.params.slug,
+      props.match.params.page || 1
+    );
+  }
 
   public componentWillReceiveProps(nextProps: any): void {
     if(
@@ -83,61 +85,78 @@ export class ListView extends React.Component<ListViewProps, State> {
     }
   }
 
-    public loadPageData(
-      slug: string,
-      page: number
-    ): void {
-        this.state.api.get(`/tag/${slug}?page=${page}`).then((content: any) => {
-            const paginationInfo = this.extractPagination(content, slug);
+  public loadPageData(
+    slug: string,
+    page: number
+  ): void {
+      this.state.api.get(`/tag/${slug}?page=${page}`).then((content: any) => {
+          const paginationInfo = this.extractPagination(content, slug);
 
-            this.setState({
-                page: paginationInfo.current_page,
-                paginationData: paginationInfo,
-                content: content.data,
-                isLoading: false
-            });
-        });
+          this.setState({
+              page: paginationInfo.current_page,
+              paginationData: paginationInfo,
+              content: content.data,
+              isLoading: false
+          });
+      });
+  }
+
+  private extractPagination(data: any, slug: string): PaginationData {
+    const paginationInfo = {
+      ...data
+    };
+    delete paginationInfo.data;
+    paginationInfo.slug = slug;
+    return paginationInfo;
+  }
+
+  public render(): JSX.Element {
+    this.currentReady = 0;
+
+    if(!this.state.isLoading) {
+      this.props.onReady();
     }
 
-    private extractPagination(data: any, slug: string): PaginationData {
-      const paginationInfo = {
-        ...data
-      };
-      delete paginationInfo.data;
-      paginationInfo.slug = slug;
-      return paginationInfo;
-    }
+    return (
+      <>
+        <LoadingIndicator
+          isLoading={this.state.isLoading}
+        />
+        <div className={"container-outer"}>
+            <div className={"container-inner row"}>
+                <div className={"content-main"}>
+                    {this.state.paginationData ? (<Paginator
+                      paginationData={this.state.paginationData!}
+                      onItemClick={() => this.props.onReady()}
+                    />) : (undefined)}
 
-    public render(): JSX.Element {
-      return (
-        <>
-          <LoadingIndicator
-            isLoading={this.state.isLoading}
-          />
-          <div className={"container-outer"}>
-              <div className={"container-inner row"}>
-                  <div className={"content-main"}>
-                      {this.state.paginationData ? (<Paginator
-                        paginationData={this.state.paginationData!}
-                      />) : (undefined)}
+                    {this.state.content && this.state.content!.map((item: Content, idx: number) => {
+                        return (
+                            <ListViewItem
+                                key={idx}
+                                content={item}
+                                onReady={() => {
+                                  this.currentReady++;
+                                  if(this.currentReady === this.state.content!.length) {
+                                    this.props.onReady();
+                                  }
+                                }}
+                            />
+                        );
+                    })}
 
-                      {this.state.content && this.state.content!.map((item: Content, idx: number) => {
-                          return (
-                              <ListViewItem
-                                  key={idx}
-                                  content={item}
-                              />
-                          );
-                      })}
-
-                      {this.state.paginationData ? (<Paginator
-                        paginationData={this.state.paginationData!}
-                      />) : (undefined)}
-                  </div>
-                  <SidebarView />
-              </div>
-          </div>
-        </>
-      );
-    }
+                    {this.state.paginationData ? (<Paginator
+                      paginationData={this.state.paginationData!}
+                      onItemClick={() => this.props.onReady()}
+                    />) : (undefined)}
+                </div>
+                <SidebarView />
+            </div>
+        </div>
+      </>
+    );
+  }
 }
+
+const ListViewWithRouter = withRouter(ListView);
+export { ListViewWithRouter };

@@ -9,6 +9,7 @@ interface ListViewItemProps {
      * The list view items data
      */
     content: Content;
+    onReady(): void;
 }
 
 interface State {}
@@ -23,6 +24,10 @@ export class ListViewItem extends React.Component<ListViewItemProps, State> {
         super(props, context);
 
         this.state = {};
+    }
+
+    public componentDidMount(): void {
+        this.props.onReady();
     }
 
     public render(): JSX.Element {

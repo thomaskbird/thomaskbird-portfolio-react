@@ -7,6 +7,7 @@ import { PaginationData } from "../../interfaces";
 
 interface PaginatorProps {
   paginationData: PaginationData;
+  onItemClick?(): void;
 }
 
 interface State {
@@ -48,10 +49,16 @@ export class Paginator extends React.Component<PaginatorProps, State> {
     );
   }
 
+  private handleClick(): void {
+    if(this.props.onItemClick) {
+      this.props.onItemClick();
+    }
+  }
+
   private generateFirstLink(): any {
     if(this.props.paginationData.current_page > 1) {
       return (
-        <li key={"first"}><Link to={`/list/${this.props.paginationData.slug}/1`}>First page</Link></li>
+        <li key={"first"}><Link onClick={() => this.handleClick()} to={`/list/${this.props.paginationData.slug}/1`}>First page</Link></li>
       );
     }
   }
@@ -59,7 +66,7 @@ export class Paginator extends React.Component<PaginatorProps, State> {
   private generatePreviousLink(): any {
     if(this.props.paginationData.current_page > 1) {
       return (
-        <li key={"previous"}><Link to={`/list/${this.props.paginationData.slug}/${(this.props.paginationData.current_page - 1)}`}>Previous</Link></li>
+        <li key={"previous"}><Link onClick={() => this.handleClick()} to={`/list/${this.props.paginationData.slug}/${(this.props.paginationData.current_page - 1)}`}>Previous</Link></li>
       );
     }
   }
@@ -67,7 +74,7 @@ export class Paginator extends React.Component<PaginatorProps, State> {
   private generateLastLink(): any {
     if(this.props.paginationData.current_page < this.state.totalPages) {
       return (
-        <li key={"last"}><Link to={`/list/${this.props.paginationData.slug}/${this.state.totalPages}`}>Last page</Link></li>
+        <li key={"last"}><Link onClick={() => this.handleClick()} to={`/list/${this.props.paginationData.slug}/${this.state.totalPages}`}>Last page</Link></li>
       );
     }
   }
@@ -75,7 +82,7 @@ export class Paginator extends React.Component<PaginatorProps, State> {
   private generateNextLink(): any {
     if(this.props.paginationData.current_page < this.state.totalPages) {
       return (
-        <li key={"next"}><Link to={`/list/${this.props.paginationData.slug}/${(this.props.paginationData.current_page + 1)}`}>Next</Link></li>
+        <li key={"next"}><Link onClick={() => this.handleClick()} to={`/list/${this.props.paginationData.slug}/${(this.props.paginationData.current_page + 1)}`}>Next</Link></li>
       );
     }
   }
@@ -83,7 +90,7 @@ export class Paginator extends React.Component<PaginatorProps, State> {
   private generateNumberLink(num: number): any {
     if(this.state.totalPages > 1) {
       return (
-        <li key={(num + 1)}><Link className={this.props.paginationData.current_page === (num + 1) ? "current" : ""} to={`/list/${this.props.paginationData.slug}/${(num + 1)}`}>{(num + 1)}</Link></li>
+        <li key={(num + 1)}><Link onClick={() => this.handleClick()} className={this.props.paginationData.current_page === (num + 1) ? "current" : ""} to={`/list/${this.props.paginationData.slug}/${(num + 1)}`}>{(num + 1)}</Link></li>
       );
     } else {
       return (

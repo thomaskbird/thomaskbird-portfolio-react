@@ -25,7 +25,7 @@ import {
 // views
 import { HomeView } from "./HomeView";
 import { InsideView } from "./InsideView";
-import { ListView } from "./ListView";
+import { ListViewWithRouter } from "./ListView";
 import { NavMain } from "../partials/NavMain";
 import { Brand } from "../partials/Brand";
 import { FooterPublic } from "../partials/FooterPublic";
@@ -92,10 +92,6 @@ export class Shell extends React.Component<ShellProps, State> {
     }
   }
 
-  public componentDidMount(): void {
-    scrollSpyer(".main-page-content");
-  }
-
   private setPageData(): void {
     const path = window.location.pathname;
     this.setState({ path: path });
@@ -130,7 +126,11 @@ export class Shell extends React.Component<ShellProps, State> {
             <Route path={"/services"} component={ServicesView} />
             <Route path={"/resume"} component={ResumeView} />
             <Route path={"/search/:term?"} component={SearchView} />
-            <Route path={"/list/:slug/:page?"} component={ListView} />
+            <Route path={"/list/:slug/:page?"}>
+              <ListViewWithRouter
+                onReady={() => scrollSpyer(".main-page-content")}
+              />
+            </Route>
             <Route path={"/:slug/:contentType?"} component={InsideView} />
             <Route component={InsideView} />
           </Switch>

@@ -37,6 +37,41 @@
   }
 }
 
+.animate-on-scroll {
+  visibility: hidden;
+}
+
+.fadeIn {
+  visibility: visible;
+  animation: fade-in .5s ease-in;
+}
+
+@keyframes fade-in {
+  0% {
+    transform: translateX(10%) translateY(50%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+.fadeOut {
+  animation: fade-out 1s ease-in;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 @media (max-width: 450px) {
   .ListViewItem {
     flex-direction: column;
