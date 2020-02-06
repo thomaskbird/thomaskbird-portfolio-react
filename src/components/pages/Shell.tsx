@@ -25,7 +25,7 @@ import {
 // views
 import { HomeView } from "./HomeView";
 import { InsideView } from "./InsideView";
-import { ListView } from "./ListView";
+import { ListViewWithRouter } from "./ListView";
 import { NavMain } from "../partials/NavMain";
 import { Brand } from "../partials/Brand";
 import { FooterPublic } from "../partials/FooterPublic";
@@ -34,6 +34,7 @@ import {ServicesView} from "./ServicesView";
 import {SearchView} from "./SearchView";
 import {ResumeView} from "./ResumeView";
 import { RouteComponentProps } from "react-router";
+import {scrollSpyer} from "../../Helpers";
 
 library.add(
   faChevronDown,
@@ -125,7 +126,11 @@ export class Shell extends React.Component<ShellProps, State> {
             <Route path={"/services"} component={ServicesView} />
             <Route path={"/resume"} component={ResumeView} />
             <Route path={"/search/:term?"} component={SearchView} />
-            <Route path={"/list/:slug/:page?"} component={ListView} />
+            <Route path={"/list/:slug/:page?"}>
+              <ListViewWithRouter
+                onReady={() => scrollSpyer(".main-page-content")}
+              />
+            </Route>
             <Route path={"/:slug/:contentType?"} component={InsideView} />
             <Route component={InsideView} />
           </Switch>
