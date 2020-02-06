@@ -7,7 +7,12 @@ import {Job} from "../../interfaces";
 import {ResumeItem} from "../partials/ResumeItem";
 import {ResumeAbout} from "../partials/ResumeAbout";
 
-interface ResumeViewProps {}
+interface ResumeViewProps {
+    /**
+     * Fires when element has rendered
+     */
+    onReady(): void;
+}
 
 interface State {
     /**
@@ -26,6 +31,7 @@ interface State {
 
 export class ResumeView extends React.Component<ResumeViewProps, State> {
     public static readonly displayName = "App component";
+    private currentReady = 0;
 
     constructor(
         props: ResumeViewProps,
@@ -50,6 +56,12 @@ export class ResumeView extends React.Component<ResumeViewProps, State> {
     }
 
     public render(): JSX.Element {
+        this.currentReady = 0;
+
+        if(!this.state.isLoading) {
+            // this.props.onReady();
+        }
+
         return (
           <>
             <LoadingIndicator
@@ -70,6 +82,12 @@ export class ResumeView extends React.Component<ResumeViewProps, State> {
                                         key={idx}
                                         resume={item}
                                         idx={idx}
+                                        onReady={() => {
+                                            this.currentReady++;
+                                            if(this.currentReady === this.state.jobs!.length) {
+                                                this.props.onReady();
+                                            }
+                                        }}
                                     />
                                 );
                             })}

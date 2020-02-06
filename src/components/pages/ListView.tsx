@@ -7,7 +7,6 @@ import {ListViewItem} from "../partials/ListViewItem";
 import {LoadingIndicator} from "../partials/LoadingIndicator";
 import {RouteComponentProps, withRouter} from "react-router";
 import { Paginator } from "../partials/Paginator";
-import { networkInterfaces } from "os";
 
 interface ListViewProps extends RouteComponentProps<any> {
   onReady(): void;

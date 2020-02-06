@@ -14,10 +14,14 @@ interface ResumeItemProps {
      * index of item
      */
     idx: number;
-  /**
-   * Defines whether this is the print view
-   */
-  isPrintView?: boolean;
+    /**
+     * Defines whether this is the print view
+     */
+    isPrintView?: boolean;
+    /**
+     * Fires when element has rendered
+     */
+    onReady(): void;
 }
 
 interface State {}
@@ -30,8 +34,11 @@ export class ResumeItem extends React.Component<ResumeItemProps, State> {
         context: any
     ) {
         super(props, context);
-
         this.state = {};
+    }
+
+    public componentDidMount(): void {
+        this.props.onReady();
     }
 
     public render(): JSX.Element {

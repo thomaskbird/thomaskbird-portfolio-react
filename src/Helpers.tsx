@@ -8,18 +8,32 @@ export function createDescription(str: string, limit: any = false): string {
     return cleanStr;
 }
 
-export function scrollSpyer(elementToWatch: string): void {
-    const config = {
+interface ScrollSpyerInterface {
+  elementsToWatchOnScroll: string;
+  classToAdd: string;
+  classToAddOnRemove: string;
+  desiredViewportHeightPercentage: number;
+  offsetTop: number;
+}
+
+export function scrollSpyer(scrollingElement: string, config?: Partial<ScrollSpyerInterface>): any {
+    const defaultConfig: ScrollSpyerInterface = {
         elementsToWatchOnScroll: ".animate-on-scroll",
         classToAdd: "fadeIn",
         classToAddOnRemove: "fadeOut",
         desiredViewportHeightPercentage: .75,
+        offsetTop: 0,
+    };
+
+    const finalConfig = {
+      ...defaultConfig,
+      ...config
     };
 
     // define this
-    const $this: any = document.querySelector(elementToWatch) || window;
+    const $this: any = document.querySelector(scrollingElement) || window;
     // the elements that we want to animate
-    const elementsToWatchOnScroll = document.querySelectorAll(config.elementsToWatchOnScroll);
+    const elementsToWatchOnScroll = document.querySelectorAll(finalConfig.elementsToWatchOnScroll);
     // defines the distance the scroll is from top and the previous value for this
     let distanceTop = 0;
     let previousDistance = 0;
@@ -29,7 +43,7 @@ export function scrollSpyer(elementToWatch: string): void {
     // Gets the viewport height
     const viewportHeight = $this.offsetHeight;
     // defines the desired distance for when animation should trigger
-    const desiredViewportHeight = viewportHeight * config.desiredViewportHeightPercentage;
+    const desiredViewportHeight = viewportHeight * finalConfig.desiredViewportHeightPercentage;
 
     const spy = () => {
         if(elementsToWatchOnScroll.length > 0) {
@@ -47,45 +61,46 @@ export function scrollSpyer(elementToWatch: string): void {
             previousDistance = distanceTop;
 
             // iterate through elements to animate
-            // tslint:disable-next-line:forin
             for(const index in elementsToWatchOnScroll) {
-              // the individual element to animate
-              const $element: any = elementsToWatchOnScroll[index];
-              // determine distance element is from top of screen
-              const fromTop = $element.offsetTop - $this.scrollTop;
+                if(!isNaN(index as any)) {
+                    // the individual element to animate
+                    const $element: any = elementsToWatchOnScroll[index];
+                    // determine distance element is from top of screen
+                    const fromTop = $element.offsetTop - $this.scrollTop;
 
-              // determine if we are scrolling down or this is initial load
-              if(isScrollDown || isInitialLoad) {
-                // is the element closer to the top than the desired trigger point
-                if(fromTop < desiredViewportHeight) {
-                  let $elementClassList: any = [];
-                  // create the array from the nodelist
-                  $element.classList.forEach((item: any) => $elementClassList.push(item));
-                  // remove the class
-                  $elementClassList = $elementClassList.filter((e: any) => e !== config.classToAddOnRemove);
-                  if($elementClassList.indexOf(config.classToAdd) === -1) {
-                    // add the animate class
-                    $elementClassList.push(config.classToAdd);
-                  }
-                  // assign the classNames
-                  $element.className = $elementClassList.join(" ");
+                    // determine if we are scrolling down or this is initial load
+                    if(isScrollDown || isInitialLoad) {
+                      // is the element closer to the top than the desired trigger point
+                      if(fromTop < desiredViewportHeight) {
+                        let $elementClassList: any = [];
+                        // create the array from the nodelist
+                        $element.classList.forEach((item: any) => $elementClassList.push(item));
+                        // remove the class
+                        $elementClassList = $elementClassList.filter((e: any) => e !== finalConfig.classToAddOnRemove);
+                        if($elementClassList.indexOf(finalConfig.classToAdd) === -1) {
+                          // add the animate class
+                          $elementClassList.push(finalConfig.classToAdd);
+                        }
+                        // assign the classNames
+                        $element.className = $elementClassList.join(" ");
+                      }
+                    } else {
+                      // is the element farther from the top than the desired trigger point
+                      if(fromTop > desiredViewportHeight) {
+                        let $elementClassList: any = [];
+                        // create the array from the nodelist
+                        $element.classList.forEach((item: any) => $elementClassList.push(item));
+                        // remove the class
+                        $elementClassList = $elementClassList.filter((e: any) => e !== finalConfig.classToAdd);
+                        if($elementClassList.indexOf(finalConfig.classToAddOnRemove) === -1) {
+                          // add the animate class
+                          $elementClassList.push(finalConfig.classToAddOnRemove);
+                        }
+                        // assign the classNames
+                        $element.className = $elementClassList.join(" ");
+                      }
+                    }
                 }
-              } else {
-                // is the element farther from the top than the desired trigger point
-                if(fromTop > desiredViewportHeight) {
-                  let $elementClassList: any = [];
-                  // create the array from the nodelist
-                  $element.classList.forEach((item: any) => $elementClassList.push(item));
-                  // remove the class
-                  $elementClassList = $elementClassList.filter((e: any) => e !== config.classToAdd);
-                  if($elementClassList.indexOf(config.classToAddOnRemove) === -1) {
-                    // add the animate class
-                    $elementClassList.push(config.classToAddOnRemove);
-                  }
-                  // assign the classNames
-                  $element.className = $elementClassList.join(" ");
-                }
-              }
             };
         }
     };
@@ -95,6 +110,8 @@ export function scrollSpyer(elementToWatch: string): void {
         spy();
     });
     isInitialLoad = false;
+
+    return spy;
 }
 
 const buildClassString = (isUp: boolean, classList: [], classToAdd: string, classToRemove: string): string => {
