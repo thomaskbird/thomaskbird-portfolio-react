@@ -124,7 +124,14 @@ export class Shell extends React.Component<ShellProps, State> {
             <Route path={"/"} exact={true} component={HomeView} />
             <Route path={"/contact"} component={ContactView} />
             <Route path={"/services"} component={ServicesView} />
-            <Route path={"/resume"} component={ResumeView} />
+            <Route path={"/resume"}>
+              <ResumeView
+                onReady={() => scrollSpyer(".main-page-content", {
+                  elementsToWatchOnScroll: ".ResumeItem",
+                  desiredViewportHeightPercentage: 1
+                })}
+              />
+            </Route>
             <Route path={"/search/:term?"} component={SearchView} />
             <Route path={"/list/:slug/:page?"}>
               <ListViewWithRouter
