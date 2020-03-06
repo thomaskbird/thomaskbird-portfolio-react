@@ -8,10 +8,10 @@ interface ResumeExperienceProps {
      * All of the pages data
      */
     jobs: Job[] | undefined;
-  /**
-   * Determines whether this is the print view
-   */
-  isPrintView?: boolean;
+    /**
+     * Determines whether this is the print view
+     */
+    isPrintView?: boolean;
 }
 
 interface State {}

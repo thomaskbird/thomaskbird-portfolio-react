@@ -4,7 +4,10 @@
   flex-direction: row;
   padding-bottom: 30px;
   border-bottom: 1px solid #ddd;
-  visibility: hidden;
+
+  &.hidden {
+    // visibility: hidden;
+  }
 /*
   &.alt {
     flex-direction: row-reverse;

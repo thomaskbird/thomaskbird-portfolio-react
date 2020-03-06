@@ -21,7 +21,7 @@ interface ResumeItemProps {
     /**
      * Fires when element has rendered
      */
-    onReady(): void;
+    onReady?(): void;
 }
 
 interface State {}
@@ -38,12 +38,25 @@ export class ResumeItem extends React.Component<ResumeItemProps, State> {
     }
 
     public componentDidMount(): void {
-        this.props.onReady();
+        if(this.props.onReady) {
+            this.props.onReady();
+        }
     }
 
     public render(): JSX.Element {
+
+        const classList = ["ResumeItem"];
+
+        if(this.props.idx % 2 === 0) {
+            classList.push("alt");
+        }
+
+        if(this.props.onReady) {
+            classList.push("hidden");
+        }
+
         return (
-            <div className={this.props.idx % 2 === 0 ? "ResumeItem" : "ResumeItem alt"}>
+            <div className={classList.join(" ")}>
                 <div className={"ResumeItem-img"}>
                     <img src={`http://api.thomaskbird.com/img/${this.props.resume.logo}`} alt={this.props.resume.title} />
                 </div>
