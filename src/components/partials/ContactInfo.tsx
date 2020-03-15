@@ -19,7 +19,7 @@ export class ContactInfo extends React.Component<ContactInfoProps, State> {
 
     public render(): JSX.Element {
         return (
-            <span className={"ContactInfo"}>Ann Arbor, MI 48103 | P: 313-410-3709 | E: Thomas.Bird1984@gmail.com | W: ThomasKBird.com</span>
+            <span className={"ContactInfo"}>Toledo, OH | P: 313-410-3709 | E: Thomas.Bird1984@gmail.com | W: ThomasKBird.com</span>
         );
     }
 }
