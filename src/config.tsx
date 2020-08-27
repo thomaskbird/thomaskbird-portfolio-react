@@ -3,5 +3,5 @@ export interface Configuration {
 }
 
 export const config: Configuration = {
-  apiUrl: "http://api.thomaskbird.com/api"
+  apiUrl: "https://api.thomaskbird.com/api"
 };

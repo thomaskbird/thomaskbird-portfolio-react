@@ -1,5 +1,5 @@
 {
-  "name": "pds-web-app",
+  "name": "thomas-k-bird",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -135,10 +135,6 @@
     "buildProdTest": "npm run clean && webpack --env.prod --env.sourceMap",
     "build-sandbox": "npm run clean && webpack --env.prod --env.sourceMap --env.sandbox",
     "zip-dist": "zip -r dist.zip dist",
-    "build-api-code-generator": "mvn -f swagger-codegen/Generator/pom.xml clean package",
-    "generate-api-code:main": "java -cp swagger-codegen/swagger-codegen-cli.jar:swagger-codegen/Generator/target/PDSWebApp-swagger-codegen-1.0.0.jar io.swagger.codegen.Codegen -l PDSWebApp -c swagger-codegen/api-docs/main-config.json -i swagger-codegen/api-docs/main.json -o ./src/generated-code/api",
-    "generate-api-code:vehicle": "java -cp swagger-codegen/swagger-codegen-cli.jar:swagger-codegen/Generator/target/PDSWebApp-swagger-codegen-1.0.0.jar io.swagger.codegen.Codegen -l PDSWebApp -c swagger-codegen/api-docs/vehicle-config.json -i swagger-codegen/api-docs/vehicle.json -o ./src/generated-code/api",
-    "generate-api-code": "rm -rf src/generated-code/api && npm run generate-api-code:main && npm run generate-api-code:vehicle",
     "bamboo-test": "npm run compile && npm run lint && npm run lint-sass && npm run prettier && npm run test-coverage",
     "static-analysis-sonarqube": "sonar-scanner -Dsonar.branch=`git symbolic-ref --short -q HEAD | tr -d '\n'`"
   },
