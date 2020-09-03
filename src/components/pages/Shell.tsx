@@ -61,14 +61,14 @@ interface ThemeData {
 
 const themes: ThemeData[] = [
   {
-    name: "green",
-    backgroundColor: "#4e847a",
-    borderColor: "#2b443f",
-  },
-  {
     name: "blue",
     backgroundColor: "#253f58",
     borderColor: "#000",
+  },
+  {
+    name: "green",
+    backgroundColor: "#4e847a",
+    borderColor: "#2b443f",
   },
   {
     name: "red",
