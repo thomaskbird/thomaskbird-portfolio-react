@@ -53,6 +53,35 @@ library.add(
   faChevronRight,
 );
 
+interface ThemeData {
+  name: string;
+  backgroundColor: string;
+  borderColor: string;
+}
+
+const themes: ThemeData[] = [
+  {
+    name: "green",
+    backgroundColor: "#4e847a",
+    borderColor: "#2b443f",
+  },
+  {
+    name: "blue",
+    backgroundColor: "#253f58",
+    borderColor: "#000",
+  },
+  {
+    name: "red",
+    backgroundColor: "#9e6161",
+    borderColor: "#754646"
+  },
+  {
+    name: "purple",
+    backgroundColor: "#6d3a7d",
+    borderColor: "#3f2248",
+  }
+];
+
 export interface ShellProps extends RouteComponentProps<any> {
   config?: object;
 }
@@ -66,6 +95,14 @@ interface State {
    * The current path
    */
   path: string | undefined;
+  /**
+   * Header background color
+   */
+  headerBackgroundColor: string;
+  /**
+   * Header border color
+   */
+  headerBorderColor: string;
 }
 
 export class Shell extends React.Component<ShellProps, State> {
@@ -79,7 +116,9 @@ export class Shell extends React.Component<ShellProps, State> {
 
     this.state = {
       path: undefined,
-      isTop: true
+      isTop: true,
+      headerBackgroundColor: themes[0].backgroundColor,
+      headerBorderColor: themes[0].borderColor,
     };
 
     ReactGA.initialize("UA-40542612-8");
@@ -89,7 +128,17 @@ export class Shell extends React.Component<ShellProps, State> {
   public componentDidUpdate(prevProps: any, prevState: any, snapshot: any): void {
     if(this.state.path !== window.location.pathname) {
       this.setPageData();
+      this.changeHeader();
     }
+  }
+
+  private changeHeader(): void {
+    const randNum = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
+    const theme = themes[randNum];
+    this.setState({
+      headerBackgroundColor: theme.backgroundColor,
+      headerBorderColor: theme.borderColor,
+    });
   }
 
   private setPageData(): void {
@@ -102,7 +151,13 @@ export class Shell extends React.Component<ShellProps, State> {
     return (
       <div className={"overall-wrapper"}>
         <div className={this.state.isTop ? "header-wrap animate-height" : "header-wrap animate-height hide"}>
-          <div className={"container-outer nav-public"}>
+          <div
+            className={"container-outer nav-public"}
+            style={{
+              backgroundColor: this.state.headerBackgroundColor,
+              borderColor: this.state.headerBorderColor,
+            }}
+          >
             <div className={"container-inner"}>
               <div className={"nav-public-left"}>
                 <Brand/>

@@ -46,6 +46,7 @@
 .nav-public {
     background: #253f58;
     border-bottom: 1px solid #000;
+    transition: all .5s ease-in;
 
     a {
         text-decoration: none;
