@@ -44,8 +44,8 @@
 }
 
 .nav-public {
-    background: #fff;
-    border-bottom: 1px solid #ddd;
+    background: #253f58;
+    border-bottom: 1px solid #000;
 
     a {
         text-decoration: none;
@@ -76,12 +76,13 @@
         }
 
         a {
-            color: #999;
+            color: #aaa;
             padding: 10px;
-            font-family: trumpsoftpro,sans-serif;
             font-size: 1.6rem;
-            text-transform: uppercase;
             letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all .25s ease-in;
+            font-family: trumpsoftpro,sans-serif;
 
             svg {
                 vertical-align: baseline;
@@ -90,7 +91,7 @@
             }
 
             &:hover {
-                color: #333;
+                color: #fff;
             }
         }
     }
@@ -112,25 +113,26 @@
         margin-right: 5px;
         letter-spacing: 5px;
         text-transform: uppercase;
+        transition: all .25s ease-in;
         font-family: trumpsoftpro, sans-serif;
     }
 
     &-name {
-        color: #444;
+        color: #ddd;
     }
 
     &-title {
-        color: #999;
+        color: #bbb;
         font-weight: 200;
     }
 
     &:hover {
         .brand-name {
-            color: #000;
+            color: #fff;
         }
 
         .brand-title {
-            color: #555;
+            color: #ddd;
         }
     }
 }
