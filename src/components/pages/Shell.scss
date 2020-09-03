@@ -98,6 +98,25 @@
     }
 }
 
+.NavMainWrapper {
+    display: flex;
+
+    .MobileIcon {
+        display: none;
+        padding: .8rem .4rem;
+
+        svg {
+            color: #aaa;
+            display: block;
+            cursor: pointer;
+
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}
+
 .whats-new {
     padding: 10px 0;
     font-size: .85rem;
@@ -240,15 +259,6 @@
     }
 }
 
-@media(max-width: 500px) {
-    .brand {
-        &-name,
-        &-title {
-            font-size: .8rem;
-        }
-    }
-}
-
 // Compensating for iphone x inset area
 @media only screen
 and (device-width : 375px)
@@ -264,5 +274,77 @@ and (orientation : landscape) {
     .header-wrap.hide,
     .footer.hide {
         display: none;
+    }
+}
+
+@media(max-width: 500px) {
+    .brand {
+        padding: 0 1.2rem;
+        display: flex;
+        flex-direction: column;
+
+        &-name,
+        &-title {
+            font-size: 2rem;
+        }
+    }
+
+    .nav-public {
+        .container-inner {
+            flex-direction: row;
+            position: relative;
+        }
+
+        &-left {
+            flex: 1;
+        }
+
+        &-right {
+            justify-content: center;
+            display: flex;
+            flex: 0;
+
+            .NavMainWrapper {
+                align-self: center;
+
+                .MobileIcon {
+                    display: block;
+                }
+
+                .NavMain {
+                    left: 0;
+                    top: 100%;
+                    z-index: 1;
+                    width: 100%;
+                    display: none;
+                    margin-top: 10px;
+                    background: #fff;
+                    position: absolute;
+                    flex-direction: column;
+                    box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
+
+                    li {
+                        margin-left: 0;
+
+                        a {
+                            width: 100%;
+                            display: flex;
+                            padding: 10px 20px;
+
+                            &:hover {
+                                color: #333;
+                                background: #f7f7f7;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.open {
+                .NavMain {
+                    display: flex;
+                }
+            }
+        }
     }
 }

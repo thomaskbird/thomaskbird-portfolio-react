@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import * as ReactGA from "react-ga";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+  faBars,
   faChevronUp,
   faChevronDown,
   faCircle,
@@ -37,6 +38,7 @@ import { RouteComponentProps } from "react-router";
 import {scrollSpyer} from "../../Helpers";
 
 library.add(
+  faBars,
   faChevronDown,
   faChevronUp,
   faCircle,
@@ -103,6 +105,14 @@ interface State {
    * Header border color
    */
   headerBorderColor: string;
+  /**
+   * Controls whether the mobile nav is visible
+   */
+  isMobileNavOpen: boolean;
+  /**
+   * tracks the last theme color
+   */
+  randNum: number;
 }
 
 export class Shell extends React.Component<ShellProps, State> {
@@ -119,6 +129,8 @@ export class Shell extends React.Component<ShellProps, State> {
       isTop: true,
       headerBackgroundColor: themes[0].backgroundColor,
       headerBorderColor: themes[0].borderColor,
+      isMobileNavOpen: false,
+      randNum: 0,
     };
 
     ReactGA.initialize("UA-40542612-8");
@@ -132,8 +144,13 @@ export class Shell extends React.Component<ShellProps, State> {
     }
   }
 
+  private generateRandNum() {
+    return Math.floor(Math.random() * (3 - 0 + 1)) + 0;
+  }
+
   private changeHeader(): void {
-    const randNum = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
+    const randNum = this.generateRandNum();
+
     const theme = themes[randNum];
     this.setState({
       headerBackgroundColor: theme.backgroundColor,
@@ -162,8 +179,11 @@ export class Shell extends React.Component<ShellProps, State> {
               <div className={"nav-public-left"}>
                 <Brand/>
               </div>
-              <div className={"nav-public-right"}>
-                <NavMain/>
+              <div className={`nav-public-right ${this.state.isMobileNavOpen ? "open" : ""}`}>
+                <NavMain
+                  onToggleMobileNav={() => this.setState({ isMobileNavOpen: !this.state.isMobileNavOpen })}
+                  onCloseMobileNav={() => this.setState({ isMobileNavOpen: false })}
+                />
               </div>
             </div>
           </div>
