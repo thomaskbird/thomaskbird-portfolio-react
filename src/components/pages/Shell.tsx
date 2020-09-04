@@ -57,6 +57,7 @@ library.add(
 
 interface ThemeData {
   name: string;
+  slug: string;
   backgroundColor: string;
   borderColor: string;
 }
@@ -64,22 +65,26 @@ interface ThemeData {
 const themes: ThemeData[] = [
   {
     name: "blue",
+    slug: "theme-blue",
     backgroundColor: "#253f58",
     borderColor: "#000",
   },
   {
     name: "green",
-    backgroundColor: "#4e847a",
+    slug: "theme-green",
+    backgroundColor: "#436f67",
     borderColor: "#2b443f",
   },
   {
     name: "red",
-    backgroundColor: "#9e6161",
+    slug: "theme-red",
+    backgroundColor: "#612525",
     borderColor: "#754646"
   },
   {
     name: "purple",
-    backgroundColor: "#6d3a7d",
+    slug: "theme-purple",
+    backgroundColor: "#54345f",
     borderColor: "#3f2248",
   }
 ];
@@ -113,6 +118,10 @@ interface State {
    * tracks the last theme color
    */
   randNum: number;
+  /**
+   * Identifies which theme is current
+   */
+  currentTheme: string;
 }
 
 export class Shell extends React.Component<ShellProps, State> {
@@ -131,6 +140,7 @@ export class Shell extends React.Component<ShellProps, State> {
       headerBorderColor: themes[0].borderColor,
       isMobileNavOpen: false,
       randNum: 0,
+      currentTheme: themes[0].slug,
     };
 
     ReactGA.initialize("UA-40542612-8");
@@ -144,7 +154,7 @@ export class Shell extends React.Component<ShellProps, State> {
     }
   }
 
-  private generateRandNum() {
+  private generateRandNum(): number {
     return Math.floor(Math.random() * (3 - 0 + 1)) + 0;
   }
 
@@ -155,6 +165,7 @@ export class Shell extends React.Component<ShellProps, State> {
     this.setState({
       headerBackgroundColor: theme.backgroundColor,
       headerBorderColor: theme.borderColor,
+      currentTheme: theme.slug,
     });
   }
 
@@ -166,7 +177,7 @@ export class Shell extends React.Component<ShellProps, State> {
 
   public render(): JSX.Element {
     return (
-      <div className={"overall-wrapper"}>
+      <div className={`overall-wrapper ${this.state.currentTheme}`}>
         <div className={this.state.isTop ? "header-wrap animate-height" : "header-wrap animate-height hide"}>
           <div
             className={"container-outer nav-public"}

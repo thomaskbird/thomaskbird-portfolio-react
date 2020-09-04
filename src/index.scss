@@ -29,6 +29,64 @@ h5 {
     font-family: trumpsoftpro, sans-serif;
 }
 
+.widget-title {
+    font-weight: 500;
+}
+
+.theme {
+    &-blue {
+        b,
+        a,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .widget-title {
+            color: rgb(37, 63, 88);
+        }
+    }
+
+    &-red {
+        b,
+        a,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .widget-title  {
+            color: #612525;
+        }
+    }
+
+    &-green {
+        b,
+        a,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .widget-title  {
+            color: #436f67;
+        }
+    }
+
+    &-purple {
+        b,
+        a,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .widget-title  {
+            color: #54345f;
+        }
+    }
+}
+
 pre {
     background: #fff;
     max-height: 350px;
