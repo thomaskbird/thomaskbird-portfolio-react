@@ -60,9 +60,7 @@
 
     &-right {
         flex: 1;
-    }
 
-    &-right {
         ul {
             padding: 0;
             float: right;
@@ -96,6 +94,10 @@
             }
         }
     }
+
+    &-left {
+        display: flex;
+    }
 }
 
 .NavMainWrapper {
@@ -127,6 +129,10 @@
 .brand {
     font-weight: 600;
     font-size: 2rem;
+
+    &-wrap {
+        align-self: center;
+    }
 
     &-name,
     &-title {
@@ -297,6 +303,7 @@ and (orientation : landscape) {
 
         &-left {
             flex: 1;
+            display: flex;
         }
 
         &-right {

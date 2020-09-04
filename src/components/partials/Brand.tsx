@@ -26,7 +26,7 @@ export class Brand extends React.Component<BrandProps, State> {
 
   public render(): JSX.Element {
     return this.props.linked ? (
-      <Link to="/">
+      <Link to="/" className={"brand-wrap"}>
         <span className={"brand"}>
           <span className={"brand-name"}>ThomasBird</span>
           <span className={"brand-title"}>FullStackDeveloper</span>
