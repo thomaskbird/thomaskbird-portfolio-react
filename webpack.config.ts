@@ -113,7 +113,7 @@ export default (env: Env = {}) => {
         context: PATHS.root,
         entry: [
             ...(isDev ? ["react-hot-loader/patch"] : []),
-            isSandbox ? "./src/sandbox.tsx" : "./src/index.tsx"
+            "./src/index.tsx"
         ],
         output: {
             filename: isDev ? "[name].js" : "[name].[chunkhash].js",
@@ -257,7 +257,7 @@ export default (env: Env = {}) => {
                       ]),
                       new webpack.optimize.UglifyJsPlugin({
                           beautify: false,
-                          compress: true,
+                          compress: {},
                           comments: false,
                           sourceMap: isSourceMap
                       })
