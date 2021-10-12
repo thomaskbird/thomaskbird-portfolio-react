@@ -43,6 +43,10 @@ export class ResumeItem extends React.Component<ResumeItemProps, State> {
         }
     }
 
+    public createMarkup(content): any {
+        return {__html: content };
+    }
+
     public render(): JSX.Element {
 
         const classList = ["ResumeItem"];
@@ -75,9 +79,7 @@ export class ResumeItem extends React.Component<ResumeItemProps, State> {
                             {moment(this.props.resume.start_at).format("MMM, YYYY")} - {moment(this.props.resume.end_at).isAfter() ? "Present" : moment(this.props.resume.end_at).format("MMM, YYYY")}
                         </div>
                     </div>
-                    <div className={"ResumeItem-content-body"}>
-                        <p>{this.props.resume.body}</p>
-                    </div>
+                    <div className={"ResumeItem-content-body"} dangerouslySetInnerHTML={this.createMarkup(this.props.resume.body)} />
                 </div>
             </div>
         );
